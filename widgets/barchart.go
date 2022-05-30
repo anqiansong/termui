@@ -52,7 +52,8 @@ func (self *BarChart) Draw(buf *Buffer) {
 		// draw bar
 		height := int((data / maxVal) * float64(self.Inner.Dy()-1))
 		for x := barXCoordinate; x < MinInt(barXCoordinate+self.BarWidth, self.Inner.Max.X); x++ {
-			for y := self.Inner.Max.Y - 2; y > (self.Inner.Max.Y-2)-height; y-- {
+			for y := self.Inner.Max.Y - 2; y >= (self.Inner.Max.Y-2)-height; y-- {
+				// for y := self.Inner.Max.Y - 2; y > (self.Inner.Max.Y-2)-height; y-- {
 				c := NewCell(' ', NewStyle(ColorClear, SelectColor(self.BarColors, i)))
 				buf.SetCell(c, image.Pt(x, y))
 			}
@@ -71,7 +72,8 @@ func (self *BarChart) Draw(buf *Buffer) {
 		}
 
 		// draw number
-		numberXCoordinate := barXCoordinate + int((float64(self.BarWidth) / 2))
+		numberXCoordinate := barXCoordinate + calcNumberXPos(self.NumFormatter(data), self.BarWidth)
+		// numberXCoordinate := barXCoordinate + int((float64(self.BarWidth) / 2))
 		if numberXCoordinate <= self.Inner.Max.X {
 			buf.SetString(
 				self.NumFormatter(data),
@@ -86,4 +88,17 @@ func (self *BarChart) Draw(buf *Buffer) {
 
 		barXCoordinate += (self.BarWidth + self.BarGap)
 	}
+}
+
+func calcNumberXPos(numFormatterData string, barWidth int) int {
+	numberCharsLen := len(numFormatterData)
+	barWidthCenter := int(float64(barWidth / 2))
+
+	var numberXCharPos int = barWidthCenter - numberCharsLen + (numberCharsLen / 2)
+
+	if numberCharsLen > barWidthCenter {
+		numberXCharPos = numberCharsLen - barWidthCenter
+	}
+
+	return int(numberXCharPos)
 }
