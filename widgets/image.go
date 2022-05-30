@@ -8,7 +8,7 @@ import (
 	"image"
 	"image/color"
 
-	. "github.com/gizak/termui/v3"
+	. "github.com/anqiansong/termui/v3"
 )
 
 type Image struct {
@@ -73,7 +73,8 @@ func (self *Image) Draw(buf *Buffer) {
 					(2*by+2)*imageHeight/bufHeight/2,
 				)
 				buf.SetCell(
-					NewCell(blocksChar(ul, ur, ll, lr, self.MonochromeThreshold, self.MonochromeInvert)),
+					NewCell(blocksChar(ul, ur, ll, lr, self.MonochromeThreshold,
+						self.MonochromeInvert)),
 					image.Pt(self.Inner.Min.X+bx, self.Inner.Min.Y+by),
 				)
 			}

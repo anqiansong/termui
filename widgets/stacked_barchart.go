@@ -8,9 +8,8 @@ import (
 	"fmt"
 	"image"
 
+	. "github.com/anqiansong/termui/v3"
 	rw "github.com/mattn/go-runewidth"
-
-	. "github.com/gizak/termui/v3"
 )
 
 type StackedBarChart struct {
@@ -56,7 +55,8 @@ func (self *StackedBarChart) Draw(buf *Buffer) {
 		for j, data := range bar {
 			// draw each stacked bar
 			height := int((data / maxVal) * float64(self.Inner.Dy()-1))
-			for x := barXCoordinate; x < MinInt(barXCoordinate+self.BarWidth, self.Inner.Max.X); x++ {
+			for x := barXCoordinate; x < MinInt(barXCoordinate+self.BarWidth,
+				self.Inner.Max.X); x++ {
 				for y := (self.Inner.Max.Y - 2) - stackedBarYCoordinate; y > (self.Inner.Max.Y-2)-stackedBarYCoordinate-height; y-- {
 					c := NewCell(' ', NewStyle(ColorClear, SelectColor(self.BarColors, j)))
 					buf.SetCell(c, image.Pt(x, y))

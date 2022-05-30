@@ -2,6 +2,7 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
+//go:build ignore
 // +build ignore
 
 package main
@@ -18,8 +19,8 @@ import (
 	"os"
 	"strings"
 
-	ui "github.com/gizak/termui/v3"
-	"github.com/gizak/termui/v3/widgets"
+	ui "github.com/anqiansong/termui/v3"
+	"github.com/anqiansong/termui/v3/widgets"
 )
 
 func main() {
@@ -36,7 +37,8 @@ func main() {
 		images = append(images, image)
 	}
 	if len(images) == 0 {
-		image, _, err := image.Decode(base64.NewDecoder(base64.StdEncoding, strings.NewReader(GOPHER_IMAGE)))
+		image, _, err := image.Decode(base64.NewDecoder(base64.StdEncoding,
+			strings.NewReader(GOPHER_IMAGE)))
 		if err != nil {
 			log.Fatalf("failed to decode gopher image: %v", err)
 		}
@@ -56,9 +58,11 @@ func main() {
 		if !img.Monochrome {
 			img.Title = fmt.Sprintf("Color %d/%d", index+1, len(images))
 		} else if !img.MonochromeInvert {
-			img.Title = fmt.Sprintf("Monochrome(%d) %d/%d", img.MonochromeThreshold, index+1, len(images))
+			img.Title = fmt.Sprintf("Monochrome(%d) %d/%d", img.MonochromeThreshold, index+1,
+				len(images))
 		} else {
-			img.Title = fmt.Sprintf("InverseMonochrome(%d) %d/%d", img.MonochromeThreshold, index+1, len(images))
+			img.Title = fmt.Sprintf("InverseMonochrome(%d) %d/%d", img.MonochromeThreshold, index+1,
+				len(images))
 		}
 		ui.Render(img)
 	}

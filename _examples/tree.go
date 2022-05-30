@@ -1,12 +1,12 @@
-/// +build ignore
+// / +build ignore
 
 package main
 
 import (
 	"log"
 
-	ui "github.com/gizak/termui/v3"
-	"github.com/gizak/termui/v3/widgets"
+	ui "github.com/anqiansong/termui/v3"
+	"github.com/anqiansong/termui/v3/widgets"
 )
 
 type nodeValue string

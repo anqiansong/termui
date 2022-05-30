@@ -7,7 +7,7 @@ package widgets
 import (
 	"image"
 
-	. "github.com/gizak/termui/v3"
+	. "github.com/anqiansong/termui/v3"
 )
 
 /*Table is like:
@@ -72,7 +72,8 @@ func (self *Table) Draw(buf *Buffer) {
 
 		if self.FillRow {
 			blankCell := NewCell(' ', rowStyle)
-			buf.Fill(blankCell, image.Rect(self.Inner.Min.X, yCoordinate, self.Inner.Max.X, yCoordinate+1))
+			buf.Fill(blankCell,
+				image.Rect(self.Inner.Min.X, yCoordinate, self.Inner.Max.X, yCoordinate+1))
 		}
 
 		// draw row cells
@@ -98,7 +99,8 @@ func (self *Table) Draw(buf *Buffer) {
 					buf.SetCell(cell, image.Pt(stringXCoordinate+k, yCoordinate))
 				}
 			} else if self.TextAlignment == AlignRight {
-				stringXCoordinate := MinInt(colXCoordinate+columnWidths[j], self.Inner.Max.X) - len(col)
+				stringXCoordinate := MinInt(colXCoordinate+columnWidths[j],
+					self.Inner.Max.X) - len(col)
 				for _, cx := range BuildCellWithXArray(col) {
 					k, cell := cx.X, cx.Cell
 					buf.SetCell(cell, image.Pt(stringXCoordinate+k, yCoordinate))
@@ -129,7 +131,8 @@ func (self *Table) Draw(buf *Buffer) {
 		// draw horizontal separator
 		horizontalCell := NewCell(HORIZONTAL_LINE, separatorStyle)
 		if self.RowSeparator && yCoordinate < self.Inner.Max.Y && i != len(self.Rows)-1 {
-			buf.Fill(horizontalCell, image.Rect(self.Inner.Min.X, yCoordinate, self.Inner.Max.X, yCoordinate+1))
+			buf.Fill(horizontalCell,
+				image.Rect(self.Inner.Min.X, yCoordinate, self.Inner.Max.X, yCoordinate+1))
 			yCoordinate++
 		}
 	}

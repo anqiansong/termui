@@ -7,9 +7,8 @@ package widgets
 import (
 	"image"
 
+	. "github.com/anqiansong/termui/v3"
 	rw "github.com/mattn/go-runewidth"
-
-	. "github.com/gizak/termui/v3"
 )
 
 type List struct {
